@@ -48,6 +48,5 @@ jobs:
         authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
         repoUrl: ${{ github.server_url }}/${{ github.repository }}
         repoName: ${{ github.repository }}
-        externalId: my-external-id
-        filePath: ./app/package.json
+        filePath: ./
         command: fingerprint
