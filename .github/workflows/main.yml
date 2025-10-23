@@ -44,6 +44,6 @@ jobs:
       with:
         apiURL: ${{ secrets.CONTRAST_API_URL }}
         apiKey: ${{ secrets.CONTRAST_API_KEY }}
-        apiOrgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
+        orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
         authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
         filePath: ./package.json
