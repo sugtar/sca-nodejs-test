@@ -46,5 +46,8 @@ jobs:
         apiKey: ${{ secrets.CONTRAST_API_KEY }}
         orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
         authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
+        repoUrl: ${{ github.server_url }}/${{ github.repository }}
+        repoName: ${{ github.repository }}
+        externalId: my-external-id
         filePath: ./app/package.json
-        repositoryId: my-repo-id
+        command: fingerprint
