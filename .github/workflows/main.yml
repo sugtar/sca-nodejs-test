@@ -47,3 +47,4 @@ jobs:
         orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
         authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
         filePath: ./app/package.json
+        repositoryId: my-repo-id
