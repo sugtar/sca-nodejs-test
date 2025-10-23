@@ -40,7 +40,7 @@ jobs:
     # ...
     # Scan Artifact
     - name: Contrast SCA Action
-      uses: Contrast-Security-OSS/contrast-sca-action@3
+      uses: Contrast-Security-OSS/contrast-sca-action@v3
       with:
         apiURL: ${{ secrets.CONTRAST_API_URL }}
         apiKey: ${{ secrets.CONTRAST_API_KEY }}
