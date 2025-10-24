@@ -24,7 +24,7 @@ on:
 permissions:
   contents: read
 
-name: SCA analyze workflow
+name: SCA analyze workflow1
 jobs:
   fingerprint:
     permissions:
