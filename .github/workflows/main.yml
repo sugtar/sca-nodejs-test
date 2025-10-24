@@ -26,7 +26,7 @@ permissions:
 
 name: SCA analyze workflow
 jobs:
-  build-and-scan:
+  fingerprint:
     permissions:
         contents: read # for actions/checkout
         security-events: write # for github/codeql-action/upload-sarif
@@ -40,6 +40,7 @@ jobs:
     # ...
     # Scan Artifact
     - name: Contrast SCA Action
+      id: fingerprint
       uses: Contrast-Security-OSS/contrast-sca-action@v3
       with:
         apiURL: ${{ secrets.CONTRAST_API_URL }}
@@ -48,5 +49,27 @@ jobs:
         authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
         repoUrl: ${{ github.server_url }}/${{ github.repository }}
         repoName: ${{ github.repository }}
-        filePath: ./
+        filePath: ./app
         command: fingerprint
+    outputs:
+      fingerprint: ${{ steps.fingerprint.outputs.fingerprint }}
+  audit:
+    if: ${{ needs.fingerprint.outputs.fingerprint != '' }}
+    needs: fingerprint
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        manifest:
+          - ${{ fromJson(needs.fingerprint.outputs.fingerprint) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Contrast SCA Audit
+        uses: Contrast-Security-OSS/contrast-sca-action@v3
+        with:
+          apiURL: ${{ secrets.CONTRAST_API_URL }}
+          apiKey: ${{ secrets.CONTRAST_API_KEY }}
+          orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
+          authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
+          filePath: ${{ matrix.manifest.repositoryId }}
+          projectGroupId: ${{ matrix.manifest.projectGroupId }}
