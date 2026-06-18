@@ -22,6 +22,6 @@ jobs:
           orgId: ${{ secrets.CONTRAST_ORGANIZATION_ID }}
           authHeader: ${{ secrets.CONTRAST_AUTH_HEADER }}
           apiUrl: ${{ secrets.CONTRAST_API_URL }}
-          filePath: ./aoo
+          filePath: ./app
           severity: medium
           fail: true
